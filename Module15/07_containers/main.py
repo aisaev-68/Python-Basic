@@ -50,6 +50,8 @@ def change_list(lst, max_mass):
     else:
         for i in new_lst:
             if lst.count(lst[len(lst) - 1]) == len(lst):
+                m = lst.count(i)
+                ind = lst.index(i) - 1
                 lst.append(new_mass)
             elif int(i) < new_mass:
                 m = lst.count(i)
