@@ -1,1 +1,6 @@
-# TODO здесь писать код
+first_class = list(range(160,178,2))
+sec_class = list(range(162,183,3))
+print('Список первого класса:', first_class, '\nСписок второго класса:', sec_class)
+first_class.extend(sec_class)
+first_class.sort()
+print('Отсортированный список:', first_class)
