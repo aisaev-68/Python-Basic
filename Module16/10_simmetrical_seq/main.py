@@ -1,24 +1,32 @@
-lst = []
-n_count = 0
+def f_split(text):
+    word = ''
+    for item in text:
+        word += item + ' '
+    return word
+
+
+def f_palindrome(txt):
+    txt_reverse = txt[::-1]
+    if txt == txt_reverse:
+        return True
+    else:
+        return False
+
+
+lst = lst_dig = ''
 numb = int(input('Количество чисел: '))
-while n_count < numb:
-    n_count += 1
-    print('Число', n_count, end=': ')
-    n = int(input())
-    lst.append(n)
-print('Последовательность: ', lst)
-txt = ''
-n = 0
-k = len(lst)
-if int(lst[k - 1]) == int(lst[k - 2]):
-    for i in range(len(lst) - 2, - 1, - 1):
-        txt += str(lst[i])
-        n += 1
-else:
-    for i in range(len(lst) - 2, - 1, - 1):
-        txt += str(lst[i])
-        n += 1
+for i in range(1, numb + 1):
+    print('Число', i, end=': ')
+    n_dig = int(input())
+    lst += str(n_dig)
+
+for i in range(0, numb):
+    if f_palindrome(lst[i:numb]):
+        lst_dig = lst[:-(numb - i)]
+        lst_dig = lst_dig[::-1]
+        break
 
 
-print('Нужно приписать чисел: ', n)
-print('Сами числа: ', txt)
+print('Последовательность: ', f_split(lst))
+print('Нужно приписать чисел: ', len(lst_dig))
+print('Сами числа: ', f_split(lst_dig))

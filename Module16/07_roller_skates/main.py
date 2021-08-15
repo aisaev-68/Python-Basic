@@ -23,13 +23,13 @@ def people_size(f_lst, s_lst):
     p_count = 0
     for item in s_lst:
         for elem in f_lst:
-            if int(item) - int(elem) >= 0:
+            if int(elem) - int(item) >= 0:
+                f_lst.remove(elem)
                 n_count += 1
                 break
         if n_count == 1:
             p_count += 1
             n_count = 0
-            s_lst.remove(item)
     return p_count
 
 

@@ -1,25 +1,45 @@
-def f_song(lst):
+def f_total_time(my_list, lst):
     total_time = 0.0
+    for item in my_list:
+        k = 0
+        for _ in lst:
+            if item == lst[k][0]:
+                total_time += float(lst[k][1])
+            k += 1
+    return total_time
+
+
+def f_search(var, song_lst):
+    logic = False
+    for i in range(len(song_lst)):
+        if var == song_lst[i][0]:
+            logic = True
+    return logic
+
+
+def f_song(lst):
+    my_lst = []
     n_count = 0
     numb_songs = int(input('Сколько песен выбрать? '))
     if numb_songs > 0:
         while n_count < numb_songs:
-            logic = True
             print('Название', n_count + 1, 'песни: ', end='')
-            song = input()
-            for i in range(len(lst)):
-                if lst[i].count(song) > 0:
-                    total_time += float(lst[i][1])
-                    logic = False
-            if logic:
-                print('\nВ списке отсутствует песня,', song, '. Выберите другую песню.\n')
+            name_song = input()
+            if f_search(name_song, lst):
+                if my_lst.count(name_song) == 0:
+                    my_lst.append(name_song)
+                else:
+                    print('\nВведенная песня содержится в Вашем списке. Повторите ввод.')
+                    n_count -= 1
+            else:
+                print('\nВ списке отсутствует песня,', name_song, '. Выберите другую песню.\n')
                 n_count -= 1
             n_count += 1
     else:
         print('\nПесны не выбраны! Повторите ввод!\n')
         f_song(lst)
-    if total_time > 0:
-        print('\nОбщее время звучания песен:', round(total_time, 2), 'минут.')
+    print(my_lst)
+    print('\nОбщее время звучания песен:', round(f_total_time(my_lst, lst), 2), 'минут.')
 
 
 violator_songs = [['World in My Eyes', 4.86], ['Sweetest Perfection', 4.43],
