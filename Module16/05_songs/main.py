@@ -38,7 +38,6 @@ def f_song(lst):
     else:
         print('\nПесны не выбраны! Повторите ввод!\n')
         f_song(lst)
-    print(my_lst)
     print('\nОбщее время звучания песен:', round(f_total_time(my_lst, lst), 2), 'минут.')
 
 
