@@ -15,6 +15,7 @@ def f_size_list(lst, txt, txt1, txt2):
     else:
         print('\nОшибка ввода! Повторите ввод!\n')
         f_size_list(lst, txt, txt1, txt2)
+    lst.sort()
 #    return lst
 
 
