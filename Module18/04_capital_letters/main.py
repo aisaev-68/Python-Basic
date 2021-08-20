@@ -1,4 +1,4 @@
-lst = [i for i in input('Введите строку: ').split()]
+lst = [i.lower() for i in input('Введите строку: ').split()]
 count = 0
 for item in lst:
     lst1 = [j for j in item]
