@@ -2,12 +2,15 @@ def txt_reverse(lst1):
     word_list = []
     for item in lst1:
         words = ''
+        word = ''
         if f_check_sym(item):
             for i_elem in item:
                 if i_elem.isalpha() or i_elem.isdigit():
-                    words += i_elem
+                    word += i_elem
                 else:
-                    words = words[::-1] + i_elem
+                    words += word[::-1] + i_elem
+                    word = ''
+            words += word[::-1]
         else:
             words += item[::-1]
         word_list.append(words)
