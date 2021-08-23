@@ -4,7 +4,6 @@ goods = {
     'Диван': '34567',
     'Стул': '45678',
 }
-
 store = {
     '12345': [
         {'quantity': 27, 'price': 42},
@@ -23,5 +22,13 @@ store = {
         {'quantity': 43, 'price': 97},
     ],
 }
-
-# TODO здесь писать код
+goods.update(store)
+print('Результат работы программы.')
+for key, value in goods.items():
+    for key1, value1 in store.items():
+        summ1 = summ2 = 0
+        if value == key1:
+            for item in value1:
+                summ1 += item['quantity']
+                summ2 += item['price'] * item['quantity']
+            print(f'{key} - {summ1} шт, стоимость {summ2} руб')
