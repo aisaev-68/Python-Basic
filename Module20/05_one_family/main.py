@@ -17,6 +17,8 @@ data = dict()
 numb = int(input('Сколько записей ввести в базу?: '))
 add_contact(numb)
 sur_name = input('\nВведите фамилию для поиска: ').title()
+if sur_name[len(sur_name) - 1:] == 'а':
+    sur_name = sur_name[:len(sur_name) - 1]
 for key, value in data.items():
     if key.split()[0] == sur_name or key.split()[0] == sur_name + 'а':
         print(key, value)
