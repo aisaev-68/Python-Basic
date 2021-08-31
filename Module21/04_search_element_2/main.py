@@ -1,4 +1,4 @@
-def search_elem(struct, k, m=1000, i=1):
+def search_elem(struct, k, m=1000, i=0):
     if k in struct:
         return struct[k]
     for value in struct.values():

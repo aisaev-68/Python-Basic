@@ -9,7 +9,7 @@ def move(n, x, y):
 
 numb = int(input('Введите количество дисков: '))
 if numb > 0:
-    move(numb,1,2)
+    move(numb, 1, 3)
 else:
     print('Ошибка ввода.')
 
