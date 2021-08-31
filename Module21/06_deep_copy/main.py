@@ -1,37 +1,40 @@
 import copy
 
 
-def change_elem(struct, val1, val2):
+def add_dict(name):
+    new_site = {f'Сайт для {name}': copy.deepcopy(site)}
+    val = change_dict(new_site, name)
+    lst.append(val)
+
+
+def change_dict(struct, name):
+    if 'h2' in struct:
+        struct['h2'] = f'У нас самая низкая цена на {name}'
+        return struct
     if isinstance(struct, dict):
         for key, value in struct.items():
             if key == 'title':
-                value = val1
-            elif key == 'h2':
-                value = val2
+                struct[key] = f'Куплю/продам {name} недорого'
             else:
-                change_elem(value, val1, val2)
-            struct.update({key: value})
+                change_dict(value, name)
+    return struct
 
 
-def print_struct(obj):
-
+def print_struct(obj, i=0):
+    i += 1
     if isinstance(obj, dict):
         for key, value in obj.items():
-            print(key)
-            print_struct(value)
+            if i == 1:
+                print(f"{key}:")
+            elif i == 2:
+                print("site = {\n\t", f"'{key}':", "{")
+            elif i == 3:
+                print(f"\t\t'{key}':", '{')
+            else:
+                print(f"\t\t\t'{key}':", end='')
+            print_struct(value, i)
     else:
-        print(obj)
-
-
-def input_arg(numb):
-    count = 0
-    while count < numb:
-        name_site = input('Введите название продукта для нового сайта: ')
-        change_elem(new_site, f'Куплю/продам {name_site} недорого', f'У нас самая низкая цена на {name_site}')
-        print(f'Сайт для {name_site}:','\nSite = {', end='')
-        print_struct(new_site)
-        count += 1
-
+        print(' ', f"'{obj}'")
 
 
 site = {
@@ -40,14 +43,21 @@ site = {
             'title': 'Куплю/продам телефон недорого'
         },
         'body': {
-            'h2': 'У нас самая низкая цена на iPhone',
+            'h2': 'У нас самая низкая цена на dddd',
             'div': 'Купить',
             'p': 'продать'
         }
     }
 }
 
-new_site = copy.deepcopy(site)
 
-num = int(input('Сколько сайтов: '))
-input_arg(num)
+lst = []
+count = 0
+numb = int(input('Сколько сайтов: '))
+while count < numb:
+    name_site = input('Введите название продукта для нового сайта: ')
+    add_dict(name_site)
+    for item in lst:
+        print_struct(item)
+    print("\t\t}\n\t}\n}")
+    count += 1
