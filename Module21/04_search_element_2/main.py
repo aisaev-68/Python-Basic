@@ -1,5 +1,5 @@
 def search_elem(struct, k, m=1000, i=0):
-    if k in struct:
+    if k in struct and m > i:
         return struct[k]
     for value in struct.values():
         if m > i and isinstance(value, dict):
@@ -33,8 +33,8 @@ site = {
 key = input('Введите искомый ключ: ')
 search_depth = int(input('Введите глубину поиска (по умалчанию - ноль): '))
 if search_depth == 0:
-    out_info(search_elem(site, key, 2))
+    out_info(search_elem(site, key))
 elif search_depth > 0:
-    out_info(search_elem(site, key, search_depth))
+    out_info(search_elem(site, key, m=search_depth))
 else:
     print('Ошибка ввода!')
