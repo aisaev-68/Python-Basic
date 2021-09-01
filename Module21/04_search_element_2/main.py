@@ -6,12 +6,16 @@ def search_elem(struct, k, m=1000, i=0):
             result = search_elem(value, k, m, i + 1)
             if result:
                 break
-
     else:
         result = None
     return result
 
 
+def out_info(res):
+    if res:
+        print(res)
+    else:
+        print('Такого ключа в структуре нет.')
 site = {
     'html': {
         'head': {
@@ -27,8 +31,10 @@ site = {
 
 
 key = input('Введите искомый ключ: ')
-val = search_elem(site, key, 2)
-if val:
-    print(val)
+search_depth = int(input('Введите глубину поиска (по умалчанию - ноль): '))
+if search_depth == 0:
+    out_info(search_elem(site, key, 2))
+elif search_depth > 0:
+    out_info(search_elem(site, key, search_depth))
 else:
-    print('Такого ключа в структуре нет.')
+    print('Ошибка ввода!')
