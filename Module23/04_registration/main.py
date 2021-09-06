@@ -1,39 +1,44 @@
-def write_correct_data(txt):
+import os
+
+
+def write_correct_data(cor_line):
     with open('registrations_good.log', 'a', encoding='utf-8') as correct_log:
-        correct_log.write(txt + '\n')
+        correct_log.write(cor_line + '\n')
 
 
-def write_error_data(txt):
+def write_error_data(cor_line):
     with open('registrations_bad.log', 'a', encoding='utf-8') as error_log:
-        error_log.write(txt + '\n')
+        error_log.write(cor_line + '\n')
 
 
 def data_validation(f_line):
-    result = 0
-    name, email, age = f_line.split()
+    txt = ''
     try:
-        if len(f_line.split()) < 3 or (not age.isdigit() and int(age) < 10 or int(age) > 99):
+        if f_line.count(' ') == 2:
+            name, email, age = f_line.split()
+        else:
+            txt = 'ValueError: в строке должны быть два пробела.'
             raise ValueError
-        try:
-            if not name.isalpha():
-                raise NameError
-            try:
-                if '@' and '.' not in email:
-                    raise SyntaxError
-            except SyntaxError:
-                result += 1
-                print("SyntaxError: адрес почты должен содержать '@' и точку.")
-        except NameError:
-            result += 1
-            print('NameError: в имени должны буквы.')
-    except ValueError:
-        result += 1
-        print('ValueError: в строке должны быть три поля или дата рождения должна быть равным числу от 10 до 99.')
-    if result == 0:
+        if len(f_line.split()) < 3 or (not age.isdigit() and int(age) < 10 or int(age) > 99):
+            txt = 'ValueError: в строке должны быть три поля или дата рождения должна ' \
+                  'быть равным числу от 10 до 99.'
+            raise ValueError
+        if not name.isalpha():
+            txt = 'NameError: в имени должны буквы.'
+            raise NameError
+        if '@' and '.' not in email:
+            txt = "SyntaxError: адрес почты должен содержать '@' и точку."
+            raise SyntaxError
         write_correct_data(f_line)
-    else:
+    except (SyntaxError, ValueError, NameError) as error:
         write_error_data(f_line)
+        print(txt, str(error).title())
 
+
+f1 = open(os.path.join(os.getcwd(), 'registrations_good.log'), 'w', encoding='utf-8')
+f2 = open(os.path.join(os.getcwd(), 'registrations_bad.log'), 'w', encoding='utf-8')
+f1.close()
+f2.close()
 
 with open('registrations.txt', 'r', encoding='utf-8') as reg_file:
     for i_line in reg_file:
