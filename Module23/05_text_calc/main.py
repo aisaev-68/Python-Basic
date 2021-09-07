@@ -1,3 +1,11 @@
+def f_sym(s):
+    if len(s) == 1 and s in '%-+=/*' \
+            or len(s) == 2 and s == '//':
+        return True
+    else:
+        return False
+
+
 def calc(f_line):
     txt = ''
     try:
@@ -9,7 +17,7 @@ def calc(f_line):
         if len(symb) != 1:
             txt = f'SyntaxError: в сроке {f_line} знак операции должен содержать один символ.'
             raise SyntaxError
-        if not int(first_numb) and (symb not in '%-+=/*' or not int(sec_numb)):
+        if not int(first_numb) and (not f_sym(symb) or not int(sec_numb)):
             txt = f'ValueError: в строке {f_line} содержаться недопустимые символы.'
             raise ValueError
         result = eval(f_line)

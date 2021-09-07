@@ -2,7 +2,8 @@ import os
 
 
 def f_sym(s):
-    if len(s) == 1 and s in '%-+=/*':
+    if len(s) == 1 and s in '%-+=/*' \
+            or len(s) == 2 and s == '//':
         return True
     else:
         return False
