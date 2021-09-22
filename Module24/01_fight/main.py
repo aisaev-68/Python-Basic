@@ -11,7 +11,7 @@ class Units:
     def strike(self, warrior):
         print('\nВоин {} нанес удар воину {}'.format(self.name, warrior.name))
         warrior.health[0] -= 20
-        warrior.health_status(warrior.health[0])
+        warrior.health_status()
 
     def health_status(self):
         print('У воина {} осталось {} здоровья'.format(self.name, self.health[0]))
