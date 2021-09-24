@@ -16,6 +16,8 @@ def out_info(res):
         print(res)
     else:
         print('Такого ключа в структуре нет.')
+
+
 site = {
     'html': {
         'head': {
